@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>News Scrape</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+  <style>
+    .panel-body a {
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron" style="background-color: rgb(0, 66, 221) ; color: rgb(205, 223, 255);">
+      <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i> News Scraper</strong></h1>
+      <button type="button" class="btn btn-default" id="run-scrape"><i class="fa fa-search"></i> Scrape</button>
+      <button type="button" class="btn btn-default" id="show-articles"><i class="fa fa-search"></i> Show Articles</button>
+      <button type="button" class="btn btn-default" id="clear-all"><i class="fa fa-trash"></i> Clear Results</button>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Top Articles</strong></h3>
+          </div>
+
+          <div class="panel-body" id="articles">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
