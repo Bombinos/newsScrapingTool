@@ -3,7 +3,7 @@ $.getJSON("/articles", function(data) {
 
     for (var i = 0; i < data.length; i++) {
 
-      $("#articles").append("<div>" + "<p>" + "<strong>Title: </strong>" + data[i].title + "<br />" + "<strong>Summary: </strong>" + data[i].summary + "<br />" + "<strong>Link: </strong>" + "<a href='" + data[i].link + "'>" + "ESPN" + "</a>" + "</p>" + "<button class='saveArticle'" + "data-id='" + data[i]._id + "'>" + "Save Article</button>" + "</div>" + "<br>");
+      $("#articles").append("<div>" + "<p>" + "<strong>Title: </strong>" + data[i].title + "<br />" + "<strong>Summary: </strong>" + data[i].summary + "<br />" + "<strong>Link: </strong>" + "<a href='" + data[i].link + "'>" + "Minecraft" + "</a>" + "</p>" + "<button class='saveArticle'" + "data-id='" + data[i]._id + "'>" + "Save Article</button>" + "</div>" + "<br>");
     }
   });
   
@@ -19,7 +19,7 @@ $.getJSON("/articles", function(data) {
       location.href = "/"
       for (var i = 0; i < data.length; i++) {
 
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + "<strong>Title: </strong>" + data[i].title + "<br />" + "<strong>Summary: </strong>" + data[i].summary + "<br />" + "<strong>Link: </strong>" + "<a href='" + data[i].link + "'>" + "ESPN" + "</a>" + "</p>");
+        $("#articles").append("<p data-id='" + data[i]._id + "'>" + "<strong>Title: </strong>" + data[i].title + "<br />" + "<strong>Summary: </strong>" + data[i].summary + "<br />" + "<strong>Link: </strong>" + "<a href='" + data[i].link + "'>" + "Minecraft" + "</a>" + "</p>");
       };
     });
   });
@@ -48,7 +48,7 @@ $.getJSON("/articles", function(data) {
 
         body: $("#bodyinput").val()
       }
-    });
+    })
 
       .then(function(data) {
 

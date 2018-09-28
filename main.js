@@ -29,16 +29,16 @@ app.get("/", function(req, res) {
 
 app.get("/scrape", function(req, res) {
 
-  axios.get("http://www.espn.com/").then(function(response) {
+  axios.get("https://www.minecraftforum.net/news").then(function(response) {
 
     var $ = cheerio.load(response.data);
 
-	$("div.contentItem__contentWrapper").each(function(i, element) {
+	$("div.post-excerpt-info").each(function(i, element) {
 
       var result = {};
 
-      result.title = $(this).children().text();
-      result.link = $(this).parent().attr("href");
+      result.title = $(this).parent().text();
+      result.link = $(this).children().attr("href");
       result.summary = $(this).children().attr("p");
 
       db.Article.create(result)

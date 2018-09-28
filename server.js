@@ -25,17 +25,17 @@ mongoose.connect("mongodb://localhost/newsScraper", {
 
 app.get("/scrape", function(req, res) {
 
-  axios.get("http://www.espn.com/").then(function(response) {
+  axios.get("https://www.minecraftforum.net/news").then(function(response) {
  
     var $ = cheerio.load(response.data);
 
-	$("div.contentItem__contentWrapper").each(function(i, element) {
+	$("div.post-excerpt-info").each(function(i, element) {
 
       var result = {};
 
-      result.title = $(this).children(".contentItem__title").text();
-      result.link = $(this).parent().attr("href");
-      result.summary = $(this).children("p.contentItem__subhead").text();
+      result.title = $(this).parent("div.post-excerpt-title").text();
+      result.link = $(this).children().attr("href");
+      result.summary = $(this).children("div.post-excerpt-description").text();
 
       db.Article.create(result)
         .then(function(dbArticle) {
