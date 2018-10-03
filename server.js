@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
 var axios = require("axios");
@@ -27,41 +26,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/article";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// A GET route for scraping the echoJS website
+// A GET route for scraping the website
 app.get("/scraper", function(req, res) {
-  // First, we grab the body of the html with axios
+  // Grab the body of the html with axios
   axios.get("https://www.minecraftforum.net/news").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    // Load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
+    
     $("article").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this).children("div.post-excerpt").children("div.post-excerpt-info").children("div.post-excerpt-content").children("h2.post-excerpt-title").text();
-      result.link = $(this).children("div.post-excerpt").children("div.post-excerpt-info").children("div.post-excerpt-content").children("a").attr("href");
+      result.link = $(this).children("div.post-excerpt").children("div.post-excerpt-preview").children("a").attr("href");
       result.summary = $(this).children("div.post-excerpt").children("div.post-excerpt-info").children("div.post-excerpt-content").children("div.post-excerpt-description").text();
+      console.log("title: " + result.title)
+      console.log("link: " + result.link)
+      console.log("summary: " + result.summary)
 
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
+      if (result.title && result.link && result.summary) {
+        db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
           console.log(dbArticle);
         })
-        .catch(function(err) {
+        .catch(function(err) {;
+          console.log(err)
           // If an error occurred, send it to the client
-          return res.json(err);
+          // return res.json(err);
         });
+      }
+            // Create a new Article using the `result` object built from scraping
+      
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Scrape Complete");
+   res.send("Scrape complete");
   });
 });
 

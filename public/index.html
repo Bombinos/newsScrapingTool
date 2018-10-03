@@ -5,7 +5,7 @@
     <title>Scraping With Mongoose</title>
     <style>
       body {
-        background-color: rgb(248, 250, 233);
+        background-color: rgb(238, 240, 229);
         color: rgb(0, 0, 71);
        }
       #wrapper {
@@ -17,15 +17,22 @@
       #article {
         font-size: large;
           color: rgb(0, 0, 71);
-        display: inline-block;
+          display: inline-block;
         overflow: auto;
         width: 60%;
         height: 700px;
       }
+      
+      /* #notesBtn {
+        position: relative;
+        right: 0px;
+        width: 15%;
+      } */
       #notes {
         float: right;
         width: 30%;
       }
+
       textarea, input {
           color: rgb(0, 0, 71);
         display: block;
@@ -48,8 +55,11 @@
                 <h2>The Least Important News You'll Read All Day!</h2>
                 <div id="buttons">
                     <button class="btn" id="scrapeNow">Scrape it, Baby!</button>
+                    <!-- <button class="btn" id="notesBtn">Make a Note</button> -->
+                    <div id="notes">Note here</div>
                 </div>
                 <div id="article">Here you go: </div>
+                
             </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>

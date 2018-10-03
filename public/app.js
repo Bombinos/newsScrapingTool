@@ -2,8 +2,8 @@
 $.getJSON("/article", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
-      // Display the apropos information on the page
-      $("#article").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+      // Display the information on the page
+      $("#article").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].summary + "</p>" + "<br />" + "<br />" );
     }
   });
   
@@ -16,6 +16,7 @@ $.getJSON("/article", function(data) {
     })
         .then(function () {
             location.reload();
+
         });
 });
   
@@ -24,12 +25,12 @@ $.getJSON("/article", function(data) {
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the p tag
-    var thisId = $(this).attr("data-id");
+    var data = $(this).attr("data-id");
   
     // Now make an ajax call for the Article
     $.ajax({
       method: "GET",
-      url: "/article/" + thisId
+      url: "/article/" + data
     })
       // With that done, add the note information to the page
       .then(function(data) {
